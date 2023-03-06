@@ -11,7 +11,7 @@ const Cart: React.FC = () => {
   const dispatch = useAppDispatch();
 
   // rtkQuery for getting all the products
-  const { data, isLoading, isError } = useGetCartQuery();
+  const { data, isLoading } = useGetCartQuery();
 
   // Generic hook which can be used everywhere for filtering
   const { filteredItems, setFilter, filterBy } = useFilters(
@@ -40,12 +40,15 @@ const Cart: React.FC = () => {
     );
   };
 
+  if(isLoading){
+    return <Heading>Loading...</Heading>
+  }
   return (
     <Container>
       <Heading>Shopping Cart</Heading>
 
       <FilterContainer>
-        <button onClick={handleFilter}> filter</button>
+        <button onClick={handleFilter}> filter by red color</button>
         <button onClick={handleClearFilter}> remove filter</button>
       </FilterContainer>
 

@@ -17,17 +17,21 @@ export const Button = styled.button({
   margin: "0 8px",
 });
 
-export const Count = styled.div({
+export const Count = styled.div.attrs({
+  "data-testid": "quantity-counter-count",
+})({
   fontSize: "24px",
   fontWeight: "bold",
   minWidth: "30px",
   textAlign: "center",
 });
 
-export const DecrementButton = styled(Button)(
-  ({ disabled }: { disabled: boolean }) => ({
-    opacity: disabled ? 0.7 : 1,
-  })
-);
+export const DecrementButton = styled(Button).attrs({
+  "data-testid": "quantity-counter-decrement",
+})(({ disabled }: { disabled: boolean }) => ({
+  opacity: disabled ? 0.7 : 1,
+}));
 
-export const IncrementButton = styled(Button)({});
+export const IncrementButton = styled(Button).attrs({
+  "data-testid": "quantity-counter-increment",
+})({});

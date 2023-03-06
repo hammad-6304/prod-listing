@@ -21,13 +21,15 @@ const QuantityCounter: React.FC<ICounter> = ({ initialValue }) => {
   };
 
   return (
-    <CounterContainer>
-      <DecrementButton onClick={handleDecrement} disabled={count === 1}>
-        -
-      </DecrementButton>
-      <Count>{count}</Count>
-      <IncrementButton onClick={handleIncrement}>+</IncrementButton>
-    </CounterContainer>
+    <div data-testid="quantity-counter">
+      <CounterContainer>
+        <DecrementButton onClick={handleDecrement} disabled={count === 1}>
+          -
+        </DecrementButton>
+        <Count>{count}</Count>
+        <IncrementButton onClick={handleIncrement}>+</IncrementButton>
+      </CounterContainer>
+    </div>
   );
 };
 

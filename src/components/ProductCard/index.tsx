@@ -9,12 +9,14 @@ import {
 
 const ProductCard: React.FC<IProduct> = ({ img, name }) => {
   return (
-    <CardContainer>
-      <CardBackground backgroundImage={img} />
-      <TitleContainer>
-        <Title>{name}</Title>
-      </TitleContainer>
-    </CardContainer>
+    <div data-testid="product-card">
+      <CardContainer>
+        <CardBackground backgroundImage={img} />
+        <TitleContainer>
+          <Title>{name}</Title>
+        </TitleContainer>
+      </CardContainer>
+    </div>
   );
 };
 

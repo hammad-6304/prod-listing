@@ -9,10 +9,13 @@ interface CartItemProps extends IProduct {
 const CartItem: React.FC<CartItemProps> = ({ handleDelete, ...item }) => {
   return (
     <CartItemContainer>
-      <ProductCard {...item} />
+      <ProductCard {...item} data-testid="product-card" />
       <ActionContainer>
-        <QuantityCounter initialValue={item.quantity || 1} />
-        <div className="removeBtn" onClick={() => handleDelete(item.id)}>
+        <QuantityCounter
+          data-testid="quantity-counter"
+          initialValue={item.quantity || 1}
+        />
+        <div data-tesetid="removeBtn" className="removeBtn" onClick={() => handleDelete(item.id)}>
           Remove
         </div>
       </ActionContainer>

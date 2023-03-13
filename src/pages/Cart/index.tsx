@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { CartApi, useGetCartQuery } from "../../api/CartApis";
+import Button from "../../components/Button";
 import CartItem from "../../components/CartItem";
+import Dropdown from "../../components/Dropdown";
 import { useAppDispatch } from "../../hooks/storeHooks";
 import useFilters from "../../hooks/useFilters";
 import { IProduct } from "../../types/Cart.types";
+import Checkout from "../Checkout";
 import { Container, FilterContainer, Heading } from "./index.styles";
+
+const options = ["Black", "Stone", "Red"];
 
 const Cart: React.FC = () => {
   // dispatch hook
@@ -19,6 +24,16 @@ const Cart: React.FC = () => {
     "colour"
   );
 
+  // states
+
+  const [selectedOption, setSelectedOption] = useState<string>();
+  const [isCheckout, setCheckout] = useState<boolean>(false);
+
+  const handleOptionSelected = (option: string) => {
+    setSelectedOption(option);
+    filterBy("colour", option);
+  };
+
   // Filter Products
   const handleFilter = () => {
     filterBy("colour", "Red");
@@ -27,6 +42,7 @@ const Cart: React.FC = () => {
   // Clear all filters
   const handleClearFilter = () => {
     setFilter(null);
+    setSelectedOption("");
   };
 
   // Delete an item from cart
@@ -40,21 +56,55 @@ const Cart: React.FC = () => {
     );
   };
 
-  if(isLoading){
-    return <Heading>Loading...</Heading>
+  // open checout
+  const checkout = () => {
+    setCheckout(true);
+  };
+
+  const handleUpdateQty = (id: number, qty: number) => {
+    dispatch(
+      CartApi.util.updateQueryData("getCart", undefined, (draft) => {
+        return draft.map((item) =>
+          item.id === id ? { ...item, quantity: qty } : item
+        );
+      })
+    );
+  };
+
+  const handleBack = () => {
+    setCheckout(false);
+  };
+
+  if (isLoading) {
+    return <Heading>Loading...</Heading>;
+  }
+
+  if (isCheckout) {
+    return <Checkout handleBack={handleBack} products={data} />;
   }
   return (
     <Container>
       <Heading>Shopping Cart</Heading>
 
       <FilterContainer>
-        <button onClick={handleFilter}> filter by red color</button>
-        <button onClick={handleClearFilter}> remove filter</button>
+        <Dropdown
+          options={options}
+          selectedOption={selectedOption}
+          onOptionSelected={handleOptionSelected}
+          placeholder="Filter by Colour"
+        />
+        <Button onClick={handleClearFilter}>remove filter</Button>
+        <Button onClick={checkout}>checkout</Button>
       </FilterContainer>
 
       {/* Prods will be rendered here */}
       {filteredItems?.map((item: IProduct) => (
-        <CartItem {...item} handleDelete={handleDelete} key={item.id} />
+        <CartItem
+          {...item}
+          handleDelete={handleDelete}
+          handleUpdateQty={handleUpdateQty}
+          key={item.id}
+        />
       ))}
     </Container>
   );

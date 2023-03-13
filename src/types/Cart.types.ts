@@ -1,4 +1,3 @@
-
 export interface IProduct {
   id: number;
   colour: string;
@@ -6,9 +5,9 @@ export interface IProduct {
   price: number;
   img: string;
   quantity: number;
-  
 }
 
 export interface ICounter {
   initialValue: number;
+  onChange?: (value: number) => void;
 }

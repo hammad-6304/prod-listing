@@ -4,9 +4,11 @@ export const CardContainer = styled.div({
   position: "relative",
   display: "flex",
   alignItems: "flex-end",
-  width: "200px",
-  height: "200px",
+  width: "150px",
+  height: "150px",
   borderRadius: "8px",
+  borderBottomRightRadius: 0,
+  borderTopRightRadius: 0,
   overflow: "hidden",
 });
 

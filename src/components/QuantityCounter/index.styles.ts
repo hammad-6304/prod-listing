@@ -9,7 +9,7 @@ export const Button = styled.button({
   width: "24px",
   height: "24px",
   borderRadius: "50%",
-  backgroundColor: "teal",
+  backgroundColor: "rgb(144, 202, 249)",
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -29,7 +29,7 @@ export const Count = styled.div.attrs({
 export const DecrementButton = styled(Button).attrs({
   "data-testid": "quantity-counter-decrement",
 })(({ disabled }: { disabled: boolean }) => ({
-  opacity: disabled ? 0.7 : 1,
+  backgroundColor: disabled ? "lightGrey" : "rgb(144, 202, 249)",
 }));
 
 export const IncrementButton = styled(Button).attrs({

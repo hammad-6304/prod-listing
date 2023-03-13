@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { useDispatch } from "react-redux";
 import rootRtkQuery from "./rootRtkQuery";
 
 const storeHoc = () =>
